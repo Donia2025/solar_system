@@ -7,25 +7,21 @@ const app = express();
 const cors = require('cors')
 
 
-// app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, '/')));
-// app.use(cors())
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '/')));
+app.use(cors())
 
-const username = process.env.MONGO_USERNAME;
-const password = process.env.MONGO_PASSWORD;
-const uri = process.env.MONGO_URI;
-
-const fullUri = `mongodb+srv://${username}:${password}@${uri}`;
-
-mongoose.connect(fullUri, {
+mongoose.connect('mongodb+srv://supercluster.d83jj.mongodb.net/superData', {
+    user: 'superuser',
+    pass: 'SuperPassword',
     useNewUrlParser: true,
     useUnifiedTopology: true
 },
     function (err) {
         if (err) {
-        console.log("MongoDB connection error: " + err);
+            console.log("error!! " + err);
         } else {
-        console.log("MongoDB connected successfully.");
+            //  console.log("MongoDB Connection Successful")
         }
     }
 );
