@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 env:
   MONGO_URI: ${{ secrets.MONGO_URI }}
   MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
