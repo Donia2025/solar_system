@@ -7,22 +7,28 @@ const app = express();
 const cors = require('cors')
 
 
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/')));
-app.use(cors())
+// app.use(bodyParser.json());
+// app.use(express.static(path.join(__dirname, '/')));
+// app.use(cors())
 
-mongoose.connect(process.env.MONGO_URI, {
-    user: process.env.MONGO_USERNAME,
-    pass: process.env.MONGO_PASSWORD,
+const username = process.env.MONGO_USERNAME;
+const password = process.env.MONGO_PASSWORD;
+const uri = process.env.MONGO_URI;
+
+const fullUri = `mongodb+srv://${username}:${password}@${uri}`;
+
+mongoose.connect(fullUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, function(err) {
-    if (err) {
-        console.log("error!! " + err)
-    } else {
-      //  console.log("MongoDB Connection Successful")
-    }
-})
+},
+    function (err) {
+        if (err) {
+        console.log("MongoDB connection error: " + err);
+        } else {
+        console.log("MongoDB connected successfully.");
+        }
+    }
+);
 
 var Schema = mongoose.Schema;
 
